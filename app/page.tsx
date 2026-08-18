@@ -26,6 +26,7 @@ export default function Home() {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- standard fetch-on-mount pattern, fetchTasks is async and safe
     fetchTasks();
   }, []);
 
@@ -49,7 +50,9 @@ export default function Home() {
   }, [isRunning]);
 
   const formatTime = (secs: number) => {
-    const m = Math.floor(secs / 60).toString().padStart(2, '0');
+    const m = Math.floor(secs / 60)
+      .toString()
+      .padStart(2, '0');
     const s = (secs % 60).toString().padStart(2, '0');
     return `${m}:${s}`;
   };
@@ -97,7 +100,9 @@ export default function Home() {
           background: #1f1e15;
         }
         .btn {
-          transition: transform 0.12s ease, filter 0.12s ease;
+          transition:
+            transform 0.12s ease,
+            filter 0.12s ease;
         }
         .btn:hover {
           filter: brightness(1.1);
@@ -123,7 +128,15 @@ export default function Home() {
           fontFamily: "'Inter', sans-serif",
         }}
       >
-        <div style={{ display: 'flex', gap: 56, maxWidth: 920, width: '100%', padding: '0 24px' }}>
+        <div
+          style={{
+            display: 'flex',
+            gap: 56,
+            maxWidth: 920,
+            width: '100%',
+            padding: '0 24px',
+          }}
+        >
           {/* LEFT: Task list card */}
           <div
             style={{
@@ -147,7 +160,10 @@ export default function Home() {
               Tasks
             </h1>
 
-            <form onSubmit={addTask} style={{ display: 'flex', gap: 10, marginBottom: 28 }}>
+            <form
+              onSubmit={addTask}
+              style={{ display: 'flex', gap: 10, marginBottom: 28 }}
+            >
               <input
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -183,7 +199,9 @@ export default function Home() {
             </form>
 
             {tasks.length === 0 ? (
-              <p style={{ color: '#6b6656', fontSize: 14 }}>No tasks yet — add one above.</p>
+              <p style={{ color: '#6b6656', fontSize: 14 }}>
+                No tasks yet — add one above.
+              </p>
             ) : (
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                 {tasks.map((task) => (
@@ -204,12 +222,19 @@ export default function Home() {
                       className="checkbox-custom"
                       checked={task.completed}
                       onChange={() => toggleComplete(task)}
-                      style={{ width: 17, height: 17, cursor: 'pointer', flexShrink: 0 }}
+                      style={{
+                        width: 17,
+                        height: 17,
+                        cursor: 'pointer',
+                        flexShrink: 0,
+                      }}
                     />
                     <span
                       style={{
                         fontSize: 15,
-                        textDecoration: task.completed ? 'line-through' : 'none',
+                        textDecoration: task.completed
+                          ? 'line-through'
+                          : 'none',
                         color: task.completed ? '#5c5847' : '#eeeade',
                         transition: 'color 0.2s ease',
                       }}
@@ -249,9 +274,27 @@ export default function Home() {
               Pomodoro
             </h1>
 
-            <div style={{ position: 'relative', width: 220, height: 220, marginBottom: 28 }}>
-              <svg width="220" height="220" style={{ transform: 'rotate(-90deg)' }}>
-                <circle cx="110" cy="110" r={RADIUS} fill="none" stroke="#2c2a1e" strokeWidth="10" />
+            <div
+              style={{
+                position: 'relative',
+                width: 220,
+                height: 220,
+                marginBottom: 28,
+              }}
+            >
+              <svg
+                width="220"
+                height="220"
+                style={{ transform: 'rotate(-90deg)' }}
+              >
+                <circle
+                  cx="110"
+                  cy="110"
+                  r={RADIUS}
+                  fill="none"
+                  stroke="#2c2a1e"
+                  strokeWidth="10"
+                />
                 <circle
                   cx="110"
                   cy="110"
