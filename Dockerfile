@@ -2,7 +2,7 @@ FROM node:20-slim AS builder
 WORKDIR /app
 RUN apt-get update -y && apt-get install -y openssl
 COPY package*.json ./
-RUN npm ci
+RUN npm config set prefer-online true && npm ci --prefer-ipv4 || npm ci
 COPY . .
 RUN npx prisma generate
 RUN npm run build
