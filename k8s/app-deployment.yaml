@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pomodoro-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pomodoro-app
+  template:
+    metadata:
+      labels:
+        app: pomodoro-app
+    spec:
+      containers:
+        - name: pomodoro-app
+          image: pomodoro-app:local
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - secretRef:
+                name: app-secret
