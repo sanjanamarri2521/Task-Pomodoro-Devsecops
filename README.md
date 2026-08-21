@@ -98,11 +98,11 @@ Security scanning is integrated directly into the pipeline as a required check, 
 
 Every push to `dev`/`main` and every pull request to `main` triggers:
 
-| Job | What it does |
-|---|---|
-| `ci-checks` | ESLint, Prettier format check, production build |
-| `secrets-scan` | Gitleaks — scans full commit history for hardcoded secrets/credentials |
-| `terraform-scan` | Checkov — scans Terraform config for infrastructure misconfigurations |
+| Job              | What it does                                                           |
+| ---------------- | ---------------------------------------------------------------------- |
+| `ci-checks`      | ESLint, Prettier format check, production build                        |
+| `secrets-scan`   | Gitleaks — scans full commit history for hardcoded secrets/credentials |
+| `terraform-scan` | Checkov — scans Terraform config for infrastructure misconfigurations  |
 
 All security scans run in `soft_fail` mode during development to surface findings without blocking merges; this would be tightened to hard-fail in a production setting.
 
